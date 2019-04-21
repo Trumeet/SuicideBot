@@ -85,7 +85,7 @@ class SuicideBot(private val mID: String, private val mToken: String) : Telegram
                                             .setText(strings.getString("fail_missing_permission")))
                                     } else {
                                         val min = 30
-                                        val max = 60 * 60 * 24 // 1 day
+                                        val max = 60 * 5 // 5 minutes
                                         val seconds = Random().nextInt(max - min + 1) + min
                                         execute(RestrictChatMember()
                                             .setChatId(update.message.chatId)
