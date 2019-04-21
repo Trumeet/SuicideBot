@@ -15,14 +15,13 @@ class SuicideBot(private val mID: String, private val mToken: String) : Telegram
     override fun getBotToken(): String = mToken
 
     override fun onUpdateReceived(update: Update) {
-        System.out.println(update)
         val user =
             when {
                 update.hasMessage() -> update.message.from
                 update.hasCallbackQuery() -> update.callbackQuery.from
                 update.hasInlineQuery() -> update.inlineQuery.from
                 else -> {
-                    System.err.println("Cannot gather user information for $update")
+                    System.err.println("Cannot gather user information")
                     return
                 }
             }
@@ -40,7 +39,6 @@ class SuicideBot(private val mID: String, private val mToken: String) : Telegram
                 ) entityStream.get() else null
                 if (update.message.hasText() && botCommandEntity != null) {
                     val mainCommand = update.message.text.substring(0, botCommandEntity.length)
-                    System.out.println(mainCommand)
                     when (mainCommand) {
                         "/start" -> {
                             val reply = SendMessage()
